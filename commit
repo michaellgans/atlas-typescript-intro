@@ -3,7 +3,7 @@
 printf "Commit Message:\t"
 read M
 
-npx prettier --write src/components/*.jsx
+npx prettier --write src/components/*.tsx
 
 git add .
 git commit -m "$M"
