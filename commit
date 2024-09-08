@@ -1,0 +1,9 @@
+#!/bin/bash
+
+printf "Commit Message:\t"
+read M
+
+npx prettier --write src/components/*.jsx
+
+git add .
+git commit -m "$M"
