@@ -1,8 +1,7 @@
 // CoverArt Component
 
 // Asset Imports
-import { useEffect, useState } from "react";
-import { useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { AppContext } from "./ContextProvider";
 import imageSkeleton from "../assets/placeholder.svg";
 
