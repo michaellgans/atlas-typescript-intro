@@ -2,32 +2,23 @@
 
 // Asset Imports
 import { PlayListItem } from "./PlayListItem";
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { AppContext } from "./ContextProvider";
 
 // Script Imports
 
 // Type
-type Song = {
-  title: string;
-  artist: string;
-  duration: string;
-};
 
 // Returns a PlayList Component
 export function PlayList() {
   // Define Hook
-  const [songs, setSongs] = useState<Song[]>([]);
+  const songContext = useContext(AppContext);
 
-  useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/atlas-jswank/atlas-music-player-api/main/playlist",
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setSongs(data);
-      });
-  }, []);
+  if (!songContext) {
+    throw new Error();
+  }
+
+  const { songs } = songContext;
 
   return (
     <div className="play-list w-full p-6 md:w-1/2 md:border-l md:border-muted-text dark:md:border-dark-muted-text">
