@@ -5,16 +5,29 @@ import { RewindIcon } from "./icons/RewindIcon";
 import { PlayIcon } from "./icons/PlayIcon";
 import { ForwardIcon } from "./icons/ForwardIcon";
 import { ShuffleIcon } from "./icons/ShuffleIcon";
+import { useEffect, useState } from "react";
 
 // Script Imports
 
 // Returns a PlayControls Component
 export function PlayControls() {
   // Define Hook
+  const [speed, setSpeed] = useState(1);
+
+  // Reset speed to 1
+  useEffect(() => {
+    if (speed > 3) {
+      setSpeed(1);
+    }
+  }, [speed]);
+
   return (
     <div className="controls-container mb-4 flex h-10 items-center justify-between">
-      <button className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-md text-lg font-medium hover:bg-hover active:bg-active dark:hover:bg-dark-hover dark:active:bg-dark-active">
-        1x
+      <button
+        onClick={() => setSpeed(speed + 1)}
+        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-md text-lg font-medium hover:bg-hover active:bg-active dark:hover:bg-dark-hover dark:active:bg-dark-active"
+      >
+        {speed}x
       </button>
       <button className="rewind flex h-12 w-12 cursor-pointer items-center justify-center rounded-md opacity-50 hover:bg-hover active:bg-active dark:text-dark-muted-text dark:opacity-100 dark:hover:bg-dark-hover dark:active:bg-dark-active">
         <RewindIcon />
