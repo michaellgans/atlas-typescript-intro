@@ -1,9 +1,9 @@
 // CoverArt Component
 
 // Asset Imports
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { AppContext } from "./components/ContextProvider";
+import { AppContext } from "./ContextProvider";
 
 // Script Imports
 
@@ -15,7 +15,21 @@ type Art = {
 // Returns a CoverArt Component
 export function CoverArt() {
   // Define Hook
-  const [art, setArt] = useState<Art | null>(null);
+  const [art, setArt] = useState<Art | undefined>(undefined);
+
+  const songContext = useContext(AppContext);
+
+  if (!songContext) {
+    throw new Error();
+  }
+
+  const { songs } = songContext;
+
+  useEffect(() => {
+    if (songs.length > 0) {
+      setArt({ cover: songs[0].cover });
+    }
+  }, [songs]);
 
   return (
     <div className="cover-art mb-6">

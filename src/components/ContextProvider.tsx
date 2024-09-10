@@ -12,6 +12,7 @@ type Song = {
   title: string;
   artist: string;
   duration: string;
+  cover: string;
 };
 
 type AppContextType = {
