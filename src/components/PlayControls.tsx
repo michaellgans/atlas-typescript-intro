@@ -16,7 +16,6 @@ import { ShuffleOffIcon } from "./icons/ShuffleOffIcon";
 export function PlayControls() {
   // Define Hook
   const [speed, setSpeed] = useState(1);
-  const [currentSong, setCurrentSong] = useState(0);
   const [playPause, setPlayPause] = useState("play");
   const [shuffle, setShuffle] = useState("noShuffle");
 
@@ -26,7 +25,7 @@ export function PlayControls() {
     throw new Error();
   }
 
-  const { songs } = songContext;
+  const { songs, currentSong, setCurrentSong } = songContext;
   const length = songs.length;
 
   // Reset speed to 1
@@ -36,27 +35,31 @@ export function PlayControls() {
     }
   }, [speed]);
 
-  useEffect(() => {
-    console.log(currentSong);
-    if (currentSong > length || currentSong < 0) {
-      setCurrentSong(0);
-    }
-  }, [currentSong, length]);
-
+  // Toggles Play Icon to Pause Icon
   const handlePlayClick = () => {
     setPlayPause((prev) => (prev === "play" ? "pause" : "play"));
   };
 
+  // Toggles Shuffle Icon to No Shuffle Icon
   const handleShuffleClick = () => {
     setShuffle((prev) => (prev === "noShuffle" ? "shuffle" : "noShuffle"));
   };
 
+  // Moves to the next song dependent on shuffle icon
   const handleNextClick = () => {
+    let songIndex: number;
     if (shuffle === "shuffle") {
-      setCurrentSong(Math.floor(Math.random() * songs.length));
+      songIndex = Math.floor(Math.random() * songs.length);
     } else {
-      setCurrentSong(currentSong + 1);
+      // If songIndex is greater than length, disable button
+      // TODODISABLE BUTTON LOGIC
+      songIndex = (currentSong + 1) % length;
     }
+    setCurrentSong(songIndex);
+  };
+
+  const handlePreviousClick = () => {
+    setCurrentSong(currentSong - 1);
   };
 
   return (
@@ -68,7 +71,7 @@ export function PlayControls() {
         {speed}x
       </button>
       <button
-        onClick={() => setCurrentSong(currentSong - 1)}
+        onClick={handlePreviousClick}
         className="rewind flex h-12 w-12 cursor-pointer items-center justify-center rounded-md opacity-50 hover:bg-hover active:bg-active dark:text-dark-muted-text dark:opacity-100 dark:hover:bg-dark-hover dark:active:bg-dark-active"
       >
         <RewindIcon />
