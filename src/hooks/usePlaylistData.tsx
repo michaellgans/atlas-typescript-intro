@@ -15,6 +15,7 @@ export function usePlaylistData() {
     // Hooks
     const [songs, setSongs] = useState<Song[]>([]);
     const [currentSong, setCurrentSong] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         fetch(
@@ -23,12 +24,14 @@ export function usePlaylistData() {
           .then((response) => response.json())
           .then((data) => {
             setSongs(data);
+            setLoading(false);
           });
       }, []);
 
     return {
         songs,
         currentSong,
-        setCurrentSong
+        setCurrentSong,
+        loading
     };
 }
