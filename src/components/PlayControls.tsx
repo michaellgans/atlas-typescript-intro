@@ -74,6 +74,7 @@ export function PlayControls() {
       >
         {speed}x
       </button>
+
       {/* Previous Button */}
       <button
         disabled={hasLess}
@@ -99,6 +100,8 @@ export function PlayControls() {
       >
         <ForwardIcon />
       </button>
+
+      {/* Shuffle Button */}
       <button
         onClick={handleShuffleClick}
         className="shuffle flex h-12 w-12 cursor-pointer items-center justify-center rounded-md hover:bg-hover active:bg-active dark:hover:bg-dark-hover dark:active:bg-dark-active"
