@@ -1,45 +1,31 @@
 // SongTitle Component
 
 // Asset Imports
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { AppContext } from "./ContextProvider";
 
 // Script Imports
 
-// Type
-type SongInfo = {
-  title: string;
-  artist: string;
-};
-
 // Returns a SongTitle Component
 export function SongTitle() {
   // Define Hook
-  const [songInfo, setSongInfo] = useState<SongInfo | undefined>(undefined);
-
   const songContext = useContext(AppContext);
 
   if (!songContext) {
     throw new Error();
   }
 
-  const { songs } = songContext;
-
-  useEffect(() => {
-    if (songs.length > 0) {
-      setSongInfo({ title: songs[0].title, artist: songs[0].artist });
-    }
-  }, [songs]);
+  const { currentSong, songs } = songContext;
 
   return (
     <div className="song-text">
-      {songInfo ? (
+      {songs.length > 0 ? (
         <>
           <h2 className="song-title mb-2 text-2xl font-bold">
-            {songInfo.title}
+            {songs[currentSong].title}
           </h2>
           <div className="artist mb-4 text-muted-text dark:text-dark-muted-text">
-            {songInfo.artist}
+            {songs[currentSong].artist}
           </div>
         </>
       ) : (
