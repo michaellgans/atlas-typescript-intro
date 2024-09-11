@@ -63,7 +63,7 @@ export function PlayControls() {
   };
 
   const hasLess = currentSong === 0;
-  const hasMore = currentSong < length - 1;
+  const hasMore = currentSong < length - 1 || shuffle === "shuffle";
 
   return (
     <div className="controls-container mb-4 flex h-10 items-center justify-between">
