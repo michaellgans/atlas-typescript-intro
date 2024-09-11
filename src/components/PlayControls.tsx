@@ -62,29 +62,40 @@ export function PlayControls() {
     setCurrentSong(currentSong - 1);
   };
 
+  const hasLess = currentSong === 0;
+  const hasMore = currentSong < length - 1;
+
   return (
     <div className="controls-container mb-4 flex h-10 items-center justify-between">
+      {/* Speed Button */}
       <button
         onClick={() => setSpeed(speed + 1)}
         className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-md text-lg font-medium hover:bg-hover active:bg-active dark:hover:bg-dark-hover dark:active:bg-dark-active"
       >
         {speed}x
       </button>
+      {/* Previous Button */}
       <button
+        disabled={hasLess}
         onClick={handlePreviousClick}
-        className="rewind flex h-12 w-12 cursor-pointer items-center justify-center rounded-md opacity-50 hover:bg-hover active:bg-active dark:text-dark-muted-text dark:opacity-100 dark:hover:bg-dark-hover dark:active:bg-dark-active"
+        className={`rewind flex h-12 w-12 ${hasLess ? "cursor-not-allowed opacity-50" : "cursor-pointer"} items-center justify-center rounded-md hover:bg-hover active:bg-active disabled:opacity-50 dark:hover:bg-dark-hover dark:active:bg-dark-active`}
       >
         <RewindIcon />
       </button>
+
+      {/* Play Button */}
       <button
         onClick={handlePlayClick}
-        className="play border-black flex h-12 w-12 cursor-pointer items-center justify-center rounded-md border-2 hover:bg-hover active:bg-active dark:border-dark-muted-text dark:hover:bg-dark-hover dark:active:bg-dark-active"
+        className="play flex h-12 w-12 cursor-pointer items-center justify-center rounded-md border-2 hover:bg-hover active:bg-active dark:border-dark-muted-text dark:hover:bg-dark-hover dark:active:bg-dark-active"
       >
         {playPause === "play" ? <PlayIcon /> : <PauseIcon />}
       </button>
+
+      {/* Next Button */}
       <button
+        disabled={!hasMore}
         onClick={handleNextClick}
-        className="forward flex h-12 w-12 cursor-pointer items-center justify-center rounded-md hover:bg-hover active:bg-active dark:hover:bg-dark-hover dark:active:bg-dark-active"
+        className={`forward flex h-12 w-12 ${!hasMore ? "cursor-not-allowed opacity-50" : "cursor-pointer"} items-center justify-center rounded-md hover:bg-hover active:bg-active disabled:opacity-50 dark:hover:bg-dark-hover dark:active:bg-dark-active`}
       >
         <ForwardIcon />
       </button>
