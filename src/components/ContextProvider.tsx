@@ -17,6 +17,8 @@ type Song = {
 
 type AppContextType = {
   songs: Song[];
+  currentSong: number;
+  setCurrentSong: (index: number) => void;
 };
 
 // Exports
@@ -26,6 +28,7 @@ export const AppContext = createContext<AppContextType | undefined>(undefined);
 export function ContextProvider({ children }: ContextProviderProps) {
   // Define Hook
   const [songs, setSongs] = useState<Song[]>([]);
+  const [currentSong, setCurrentSong] = useState<number>(0);
 
   useEffect(() => {
     fetch(
@@ -39,6 +42,8 @@ export function ContextProvider({ children }: ContextProviderProps) {
   }, []);
 
   return (
-    <AppContext.Provider value={{ songs }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ songs, currentSong, setCurrentSong }}>
+      {children}
+    </AppContext.Provider>
   );
 }
