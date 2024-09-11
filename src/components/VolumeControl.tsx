@@ -2,7 +2,7 @@
 
 import { MuteIcon } from "./icons/MuteIcon";
 import { VolumeIcon } from "./icons/VolumeIcon";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Asset Imports
 
@@ -24,14 +24,18 @@ export function VolumeControl() {
     } else {
       setVolume(50);
     }
-  }, [volume, sound]);
+  }, [sound]);
+
+  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setVolume(Number(event.target.value));
+  };
 
   return (
     <div className="volume-control-container flex">
       <button
         aria-label="Mute Button"
         onClick={handleVolumeClick}
-        className="volume-icon flex h-5 w-5 cursor-pointer items-center justify-center rounded-md hover:bg-hover active:bg-active"
+        className="volume-icon flex h-5 w-5 cursor-pointer items-center justify-center rounded-md hover:bg-hover active:bg-active dark:hover:bg-dark-hover dark:active:bg-dark-active"
       >
         {sound === "sound" ? <VolumeIcon /> : <MuteIcon />}
       </button>
@@ -43,7 +47,8 @@ export function VolumeControl() {
             type="range"
             min="1"
             max="100"
-            defaultValue={volume}
+            value={volume}
+            onChange={handleSliderChange}
           ></input>
         </label>
       </div>
