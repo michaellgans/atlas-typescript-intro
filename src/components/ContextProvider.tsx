@@ -1,7 +1,8 @@
 // ContextProvider Component
 
 // Asset Imports
-import React, { createContext, useState, useEffect } from "react";
+import { usePlaylistData } from "../hooks/usePlaylistData";
+import React, { createContext } from "react";
 
 // Types
 type ContextProviderProps = {
@@ -27,19 +28,7 @@ export const AppContext = createContext<AppContextType | undefined>(undefined);
 // Returns a ContextProvider Component
 export function ContextProvider({ children }: ContextProviderProps) {
   // Define Hook
-  const [songs, setSongs] = useState<Song[]>([]);
-  const [currentSong, setCurrentSong] = useState<number>(0);
-
-  useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/atlas-jswank/atlas-music-player-api/main/playlist",
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setSongs(data);
-      });
-  }, []);
+  const { songs, currentSong, setCurrentSong } = usePlaylistData();
 
   return (
     <AppContext.Provider value={{ songs, currentSong, setCurrentSong }}>
