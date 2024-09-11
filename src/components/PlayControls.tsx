@@ -69,6 +69,7 @@ export function PlayControls() {
     <div className="controls-container mb-4 flex h-10 items-center justify-between">
       {/* Speed Button */}
       <button
+        aria-label="Increase Speed"
         onClick={() => setSpeed(speed + 1)}
         className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-md text-lg font-medium hover:bg-hover active:bg-active dark:hover:bg-dark-hover dark:active:bg-dark-active"
       >
@@ -77,6 +78,7 @@ export function PlayControls() {
 
       {/* Previous Button */}
       <button
+        aria-label="Previous Song"
         disabled={hasLess}
         onClick={handlePreviousClick}
         className={`rewind flex h-12 w-12 ${hasLess ? "cursor-not-allowed opacity-50" : "cursor-pointer"} items-center justify-center rounded-md hover:bg-hover active:bg-active disabled:opacity-50 dark:hover:bg-dark-hover dark:active:bg-dark-active`}
@@ -86,14 +88,16 @@ export function PlayControls() {
 
       {/* Play Button */}
       <button
+        aria-label="Play Song"
         onClick={handlePlayClick}
-        className="play flex h-12 w-12 cursor-pointer items-center justify-center rounded-md border-2 hover:bg-hover active:bg-active dark:border-dark-muted-text dark:hover:bg-dark-hover dark:active:bg-dark-active"
+        className="play flex h-12 w-12 cursor-pointer items-center justify-center rounded-md bg-hover hover:bg-hover active:bg-active dark:bg-dark-hover dark:hover:bg-dark-hover dark:active:bg-dark-active"
       >
         {playPause === "play" ? <PlayIcon /> : <PauseIcon />}
       </button>
 
       {/* Next Button */}
       <button
+        aria-label="Next Song"
         disabled={!hasMore}
         onClick={handleNextClick}
         className={`forward flex h-12 w-12 ${!hasMore ? "cursor-not-allowed opacity-50" : "cursor-pointer"} items-center justify-center rounded-md hover:bg-hover active:bg-active disabled:opacity-50 dark:hover:bg-dark-hover dark:active:bg-dark-active`}
@@ -103,6 +107,7 @@ export function PlayControls() {
 
       {/* Shuffle Button */}
       <button
+        aria-label="Shuffle Songs"
         onClick={handleShuffleClick}
         className="shuffle flex h-12 w-12 cursor-pointer items-center justify-center rounded-md hover:bg-hover active:bg-active dark:hover:bg-dark-hover dark:active:bg-dark-active"
       >

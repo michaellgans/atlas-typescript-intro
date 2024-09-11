@@ -10,7 +10,7 @@ export default {
       'dark-main-background': '#041825',
       'player-background': '#B0E7FC',
       'dark-player-background': '#044862',
-      'hover': '#76d4f9',
+      'hover': '#89DAFA',
       'dark-hover': '#065575',
       'active': '#4fc8f8',
       'dark-active': '#076388',

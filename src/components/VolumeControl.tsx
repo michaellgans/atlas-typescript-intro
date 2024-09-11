@@ -29,6 +29,7 @@ export function VolumeControl() {
   return (
     <div className="volume-control-container flex">
       <button
+        aria-label="Mute Button"
         onClick={handleVolumeClick}
         className="volume-icon flex h-5 w-5 cursor-pointer items-center justify-center rounded-md hover:bg-hover active:bg-active"
       >
