@@ -2,7 +2,7 @@
 
 import { MuteIcon } from "./icons/MuteIcon";
 import { VolumeIcon } from "./icons/VolumeIcon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Asset Imports
 
@@ -12,10 +12,19 @@ import { useState } from "react";
 export function VolumeControl() {
   // Define Hook
   const [sound, setSound] = useState("sound");
+  const [volume, setVolume] = useState(50);
 
   const handleVolumeClick = () => {
     setSound((prev) => (prev === "sound" ? "mute" : "sound"));
   };
+
+  useEffect(() => {
+    if (sound === "mute") {
+      setVolume(0);
+    } else {
+      setVolume(50);
+    }
+  }, [volume, sound]);
 
   return (
     <div className="volume-control-container flex">
@@ -33,7 +42,7 @@ export function VolumeControl() {
             type="range"
             min="1"
             max="100"
-            defaultValue="50"
+            defaultValue={volume}
           ></input>
         </label>
       </div>
